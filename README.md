@@ -1,1 +1,0 @@
-# vojiranto.github.io
