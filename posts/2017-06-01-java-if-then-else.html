@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Страничка путника - Переиспользование кода</title>
+        <link rel="stylesheet" href="../css/default.css">
+        <link rel="shortcut icon" href="../images/favicon.ico">
+    </head>
+    <body>
+        <!-- Внутренняя ссылка -->
+        <a name="top"></a>
+
+        <!-- Сслка вверх -->
+        <div class="to_top">
+            <a href="#top">↑</a>
+        </div>
+
+        <div class="centred">
+            <!-- Заголовок -->
+            <header>Страничка путника</header>
+
+            <!-- Боковая панель -->
+            <aside>
+                <!-- Меню -->
+                <div class="navigation">
+                    <a href="../">Главная</a>
+                    <a href="../about.html">О себе</a>
+                    <a href="../contact.html">Контакты</a>
+                    <a href="../archive.html">Архив</a>
+                </div>
+                <!-- Панель с тегами -->
+                <div class="tagcloud">
+                    Теги:<br>
+                    <a style="font-size: 80%" href="../tags/CSS.html">CSS</a> <a style="font-size: 80%" href="../tags/HTML.html">HTML</a> <a style="font-size: 80%" href="../tags/bash.html">bash</a> <a style="font-size: 96%" href="../tags/java.html">java</a> <a style="font-size: 80%" href="../tags/lua.html">lua</a> <a style="font-size: 90%" href="../tags/%D0%B7%D0%B0%D0%BC%D0%B5%D1%82%D0%BA%D0%B8.html">заметки</a> <a style="font-size: 86%" href="../tags/%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B0.html">литература</a>
+                </div>
+            </aside>
+            <!-- Основное тело сайта -->
+            <div class="myBody">
+                <h1>Переиспользование кода</h1>
+                <div class="info">
+    <p>Размещено  1-го июня 2017-го года.</p>
+    
+    
+        <p>Теги: <a href="../tags/java.html">java</a>.</p>
+    
+</div>
+
+<p>Следующий раздел задачника посвящён линейным операторам, однако вместо этого потренеруюсь к сведению одних задач к другим и переиспользованию кода. Для этого, а также для возможности автоматизации тестирования реализую задачи не в качестве отдельных программ, а в виде отдельных методов.</p>
+<p>Для повышения же удобства разобрался как компилировать из нескольких файлов, дальше в этом направлении сборка отдельных пакетов и использование уже собранных, но это пока подождёт.</p>
+<p>Задача 6 — нахождение максимума из двух чисел, а задача 7 — из трёх. Очевидным образом задача 7 сводится к задаче шесть. Воспользуюсь этим для сокращения писанины.</p>
+<pre><code>package numFunc;
+import java.util.Scanner;
+
+public class NumMax {
+    // Задача 6.
+    private static int max (int a, int b) {
+        if (a &gt; b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
+    // Задача 7.
+    private static int max3 (int a, int b, int c) {
+        return max(max(a, b), c);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ввод чисел.
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = scanner.nextInt();
+
+        System.out.println(max(a, b));
+        System.out.println(max3(a, b, c));
+    }
+}</code></pre>
+<p>Задача 8 — просто упражнение на умение пользоваться case’ом.</p>
+<pre><code>import java.util.Scanner;
+
+public class DaysOfTheWeek {
+    private static String day (int num) {
+        switch (num) {
+            case 1:  return &quot;Monday&quot;;
+            case 2:  return &quot;Tuesday&quot;;
+            case 3:  return &quot;Wednesday&quot;;
+            case 4:  return &quot;Thursday&quot;;
+            case 5:  return &quot;Friday&quot;;
+            case 6:  return &quot;Saturday&quot;;
+            case 7:  return &quot;Sunday&quot;;
+            default: return &quot;Error&quot;;
+        }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int num = scanner.nextInt();
+
+        System.out.println(day(num));
+    }
+}</code></pre>
+<p>Задачи 9 и 11 сводятся к задачке о записи числа в обратном порядке…</p>
+<pre><code>package palindromeNum;
+import java.util.Scanner;
+import numFunc.NumFunc;
+
+public class PalindromeNum {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int num = scanner.nextInt();
+
+        // Задача 9
+        System.out.println (
+            NumFunc.reverseNum(num, 10) == num);
+        // Задача 11
+        System.out.println (
+            NumFunc.reverseNum(num, 2) == num);
+    }
+}</code></pre>
+<p>Задача 10 - поиск корней квадратного уравнения.</p>
+<pre><code>package quadraticEquation;
+
+import java.util.Scanner;
+
+class QuadraticEquation {
+    public static void main (String[] args) {
+	    Scanner scanner = new Scanner(System.in);
+
+        // Вводим числа
+        double a = scanner.nextInt();
+	    double b = scanner.nextInt();
+	    double c = scanner.nextInt();
+
+        double d = b*b - 4*a*c;
+
+        if (d &gt; 0) {
+            double x1 = ( Math.sqrt(d) - b)/(2*a);
+            double x2 = (-Math.sqrt(d) - b)/(2*a);
+            System.out.println(
+                &quot;x1 = &quot; + x1 + &quot;; x2 = &quot; + x2);
+        }
+        if (d == 0) {
+            double x = -(b/(2*a));
+            System.out.println(&quot;x =&quot; + x);
+        }
+        if (d &lt; 0) {
+            System.out.println(&quot;No real solutions&quot;);
+        }
+    }
+}</code></pre>
+<p>В целом, как разминка не плохо, но задачи этого раздела почти бесполезны.</p>
+
+                <footer>
+                    Сайт создан с помощью
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

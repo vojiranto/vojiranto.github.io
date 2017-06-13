@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Страничка путника - Java чтение из консоли</title>
+        <link rel="stylesheet" href="../css/default.css">
+        <link rel="shortcut icon" href="../images/favicon.ico">
+    </head>
+    <body>
+        <!-- Внутренняя ссылка -->
+        <a name="top"></a>
+
+        <!-- Сслка вверх -->
+        <div class="to_top">
+            <a href="#top">↑</a>
+        </div>
+
+        <div class="centred">
+            <!-- Заголовок -->
+            <header>Страничка путника</header>
+
+            <!-- Боковая панель -->
+            <aside>
+                <!-- Меню -->
+                <div class="navigation">
+                    <a href="../">Главная</a>
+                    <a href="../about.html">О себе</a>
+                    <a href="../contact.html">Контакты</a>
+                    <a href="../archive.html">Архив</a>
+                </div>
+                <!-- Панель с тегами -->
+                <div class="tagcloud">
+                    Теги:<br>
+                    <a style="font-size: 80%" href="../tags/CSS.html">CSS</a> <a style="font-size: 80%" href="../tags/HTML.html">HTML</a> <a style="font-size: 80%" href="../tags/bash.html">bash</a> <a style="font-size: 96%" href="../tags/java.html">java</a> <a style="font-size: 80%" href="../tags/lua.html">lua</a> <a style="font-size: 90%" href="../tags/%D0%B7%D0%B0%D0%BC%D0%B5%D1%82%D0%BA%D0%B8.html">заметки</a> <a style="font-size: 86%" href="../tags/%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B0.html">литература</a>
+                </div>
+            </aside>
+            <!-- Основное тело сайта -->
+            <div class="myBody">
+                <h1>Java чтение из консоли</h1>
+                <div class="info">
+    <p>Размещено 30-го мая 2017-го года.</p>
+    
+    
+        <p>Теги: <a href="../tags/java.html">java</a>.</p>
+    
+</div>
+
+<p>Продолжаю знакомиться с jav’ой. В качестве рукаводстава решил использовать какой-нибудь задачник. Выбрал <a href="http://www.studfiles.ru/preview/5911339/">вот этот</a>. Задачки простые, но их много и для базового ознакомления подходят.</p>
+<p>Вот ими и буду руководствоваться. После <q>HelloWorld</q> там идёт задача на считывание чисел и их печать в обратном порядке.</p>
+<blockquote>
+<p><strong>Формулировка.</strong> Вывести на экран три введенных с клавиатуры числа в порядке, обратном их вводу.</p>
+</blockquote>
+<p>Алгоритм элементарный и дополнительных пояснений не требует. Единственный нюанс связан с тем, как организован ввод в java. Это можно вычитать <a href="http://pages.cs.wisc.edu/~hasti/cs367/resources/JavaIO/JavaIO.html" target="_blank">здесь</a>.</p>
+<pre><code>import java.util.Scanner;
+
+public class WriteThree {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = scanner.nextInt();
+        System.out.println(c + &quot; &quot; + b + &quot; &quot; + a);
+    }
+}</code></pre>
+
+                <footer>
+                    Сайт создан с помощью
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

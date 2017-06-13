@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Страничка путника - Java продолжаю знакомство</title>
+        <link rel="stylesheet" href="../css/default.css">
+        <link rel="shortcut icon" href="../images/favicon.ico">
+    </head>
+    <body>
+        <!-- Внутренняя ссылка -->
+        <a name="top"></a>
+
+        <!-- Сслка вверх -->
+        <div class="to_top">
+            <a href="#top">↑</a>
+        </div>
+
+        <div class="centred">
+            <!-- Заголовок -->
+            <header>Страничка путника</header>
+
+            <!-- Боковая панель -->
+            <aside>
+                <!-- Меню -->
+                <div class="navigation">
+                    <a href="../">Главная</a>
+                    <a href="../about.html">О себе</a>
+                    <a href="../contact.html">Контакты</a>
+                    <a href="../archive.html">Архив</a>
+                </div>
+                <!-- Панель с тегами -->
+                <div class="tagcloud">
+                    Теги:<br>
+                    <a style="font-size: 80%" href="../tags/CSS.html">CSS</a> <a style="font-size: 80%" href="../tags/HTML.html">HTML</a> <a style="font-size: 80%" href="../tags/bash.html">bash</a> <a style="font-size: 96%" href="../tags/java.html">java</a> <a style="font-size: 80%" href="../tags/lua.html">lua</a> <a style="font-size: 90%" href="../tags/%D0%B7%D0%B0%D0%BC%D0%B5%D1%82%D0%BA%D0%B8.html">заметки</a> <a style="font-size: 86%" href="../tags/%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B0.html">литература</a>
+                </div>
+            </aside>
+            <!-- Основное тело сайта -->
+            <div class="myBody">
+                <h1>Java продолжаю знакомство</h1>
+                <div class="info">
+    <p>Размещено  2-го июня 2017-го года.</p>
+    
+    
+        <p>Теги: <a href="../tags/java.html">java</a>.</p>
+    
+</div>
+
+<p>По задумке составителя задачника, следующие задачи должны быть посвящены знакомству с циклами… в общем буду пропускать задачи вида <q>вывести числа от x до y</q>.</p>
+<p>Задача 14 и 15 очень похожи, нужно найти наибольший и наименьший нетривиальные делители числа. В задаче 16 просят найти число нетривиальных делителей.</p>
+<p>Фактически это задачки на цикл for.</p>
+<pre><code>package divs;
+import java.util.Scanner;
+
+public class Divs {
+    // Задача 14
+    // Наибольший нетривиальный делитель.
+    public static int greatestDiv (int num) {
+        int res = num - 1;
+        for (; res &gt; 0; res--) {
+            if (num % res == 0) break;
+        }
+        return res;
+    }
+
+    // Задача 15
+    // Наименьший нетривиальный делитель.
+    public static int smallestDiv (int num) {
+        int res = 2;
+        for (; res &lt;= num; res++) {
+            if (num % res == 0) break;
+        }
+        return res;
+    }
+
+    // Задача 16
+    // число делителей.
+    public static int countDiv (int num) {
+        int res = 0;
+        for (int i = 1; i &lt;= num; i++) {
+            if (num % i == 0) res++;
+        }
+        return res;
+    }
+
+    public static void main (String[] args) {
+    	Scanner scanner = new Scanner(System.in);
+    	int num = scanner.nextInt();
+
+        System.out.println(greatestDiv(num));
+        System.out.println(smallestDiv(num));
+        System.out.println(countDiv(num));
+    }
+}</code></pre>
+<p>Вероятно, следовало несколько иначе сгруппировать методы по классам, так как решение задачи 16 можно использовать для задачи 17, где требуется определить, является ли число x простым.</p>
+<p>В задачах 18 и 19 просят найти все простые числа до определённого и первые n простых чисел соответственно.</p>
+<p>Как и ранее было решено реализовывать решение задач в виде отдельного метода возвращающего результат. В данном случае списка. Неожиданным стало то, что в java в список нельзя положить непосредственно int.</p>
+<pre><code>package primes;
+
+import divs.Divs;
+import java.util.Scanner;
+
+import java.util.*;
+
+public class Primes {
+    // Задача 17
+    // Проверка числа на простоту
+    public static boolean primeTest (int num) {
+        return  divs.Divs.countDiv(num) == 2;
+    }
+
+    // Задача 18
+    public static List &lt;Integer&gt; primesToN (int num) {
+        List&lt;Integer&gt; list = new ArrayList&lt;&gt; ();
+        for (int i = 1; i &lt;= num; i++) {
+            if (primeTest(i)) {
+                list.add(i);
+            }
+        }
+        return list;
+    }
+
+    // Задача 19
+    public static List &lt;Integer&gt; firstNPrimes (int num) {
+        List&lt;Integer&gt; list = new ArrayList&lt;&gt; ();
+        int j = 1;
+
+        for (int i = 0; i &lt; num; j++) {
+            if (primeTest(j)) {
+                list.add(j);
+                i++;
+            }
+        }
+        return list;
+    }
+
+    public static void main (String[] args) {
+        Scanner scanner = new Scanner(System.in);
+    	int num = scanner.nextInt();
+
+        System.out.println(primeTest(num));
+        System.out.println(primesToN(num));
+        System.out.println(firstNPrimes(num));
+    }
+}</code></pre>
+
+                <footer>
+                    Сайт создан с помощью
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>
