@@ -40,53 +40,10 @@
                 <h1>Java, сборка программы из нескольких файлов</h1>
                 <div class="info">
     <p>Размещено  1-го июня 2017-го года.</p>
+
     
     
-        <p>Теги: <a href="../tags/java.html">java</a>, <a href="../tags/lua.html">lua</a>, <a href="../tags/bash.html">bash</a>.</p>
     
-</div>
-
-<p>Как показала практика, скрипт написанный мной при <a href="https://vojiranto.github.io/posts/2017-05-29-java_Hello_world.html">первом знакомстве с джавой</a> насколько прост, настолько же бесполезен. В частности он не позволяет собирать программы состоящие из более чем одного файла, что есть крупный недостаток, так как затрудняет переиспользование кода.</p>
-<p>О том как собирать java программы из консоли можно прочитать <a href="https://habrahabr.ru/post/125210/" target="_blank">здесь</a>. В целом всё понятно, единственный момент, что всё это делать руками сотни раз не наш метод.</p>
-<p>Напишем новый скрипт! Он будет поддерживать два режима. Выбор между ними будем осуществлять по ключу.</p>
-<p>jc</p>
-<pre><code>#!/bin/bash
-CONFIG=`jc.lua $1 $2`
-case $1 in
--c)
-javac $CONFIG
-;;
--e)
-java $CONFIG
-;;
-*)
-esac</code></pre>
-<p>jc.lua</p>
-<pre><code>#!/usr/bin/lua5.3
-dofile (&quot;./config.lua&quot;)
-
-local package   = string.gsub(
-    config[arg[2]].package,
-    &quot;%.&quot;, &quot;/&quot;)
-local main_path = package .. &quot;/&quot; .. config[arg[2]].class
-
--- запуск компиляции.
-if      arg[1] == &quot;-c&quot; then
-    print (&quot;-sourcepath ./src -d bin src/&quot; .. 
-        main_path .. &quot;.java&quot;)
-
--- запуск исполнения.
-elseif  arg[1] == &quot;-e&quot; then
-	print (&quot;-classpath ./bin &quot; .. main_path)
-end</code></pre>
-<p>Но теперь кроме самой программы, нужно писать небольшой конфиг, где должны быть указаны имя название пакета и имя класса содержащего метод main.</p>
-<p>config.lua</p>
-<pre><code>config = {}
-config.HelloWorld = {
-    package = &quot;helloWorld&quot;;
-    class   = &quot;HelloWorld&quot;;
-}</code></pre>
-
                 <footer>
                     Сайт создан с помощью
                     <a href="http://jaspervdj.be/hakyll">Hakyll</a>
